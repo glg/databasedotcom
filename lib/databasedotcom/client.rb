@@ -382,6 +382,7 @@ module Databasedotcom
     def https_request(host=nil)
       Net::HTTP.new(host || URI.parse(self.instance_url).host, 443).tap do |http|
         http.use_ssl = true
+        http.ssl_version = :TLSv1_2
         http.ca_file = self.ca_file if self.ca_file
         http.verify_mode = self.verify_mode if self.verify_mode
       end
